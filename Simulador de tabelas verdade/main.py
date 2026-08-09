@@ -51,3 +51,25 @@ for linhas in range(possibilidades):
     camadas.append(linha)
 
 print(camadas)
+''' 
+#2 Tentativa de preenchimento da tabela (não funcionou) 
+
+verdades = 0
+falsas = 1
+periodos = possibilidades / 2
+
+#Preenchimento da primeira coluna 
+i = 0
+if quan == 2:
+   for valores in range(len(camadas)):
+       linhas[valores][0] = verdades
+
+#Tentativa de preenchimento da tabela (não funcionou dessa forma)   
+    while i <= len(camadas):
+        linha[i][0] = verdades
+        i += 1
+    j = i * 2
+    while j >= i:
+        linha[j][2] = falsas
+        j -= 1
+'''
