@@ -10,6 +10,8 @@ while i < quan:
     i += 1
 
 print(letras)
+print("Considere 0 como Falso e 1 como Verdadeiro")
+
 
 '''
 
@@ -45,8 +47,13 @@ possibilidades = 2 ** quan
 for linhas in range(possibilidades):
     linha = []
 
-    for colunas in range(quan):
-        linha.append(0)
+    for colunas in range(possibilidades):
+        if possibilidades == 4:
+            for verdadeiros in range(2):
+                linha[colunas][0] = "V"
+            falsos = verdadeiros / 2
+            for falsos in range(3, 4, 1):
+                linha[colunas][2] = "F"
 
     camadas.append(linha)
 
