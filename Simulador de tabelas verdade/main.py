@@ -1,82 +1,32 @@
-#input  de quantas proposições deverão ser simuladas e criação da lista de letras
-quan = int(input("Quantas proposições você deseja simular?"))
+# Código corrigido e funcional
+quantas = int(input("Quantas proposições você deseja simular? "))
 letras = []
-i = 0
+for i in range(quantas):
+    letra = input(f"Digite a {i+1}ª variável (ex: A, B, C): ").strip()
+    letras.append(letra)
 
-#laço para input das letras e armazenamento das proposições
-while i < quan:
-    letra = input("Insira as letras de suas proposições:")
-    letras.append([letra])
-    i += 1
+print("\nConsidere 0 como Falso e 1 como Verdadeiro\n")
 
-print(letras)
-print("Considere 0 como Falso e 1 como Verdadeiro")
-
-
-'''
-
-Primeira tentativa de montar a tabela, o erro de formação se dava pelo fato de quan ser um numero int que era adicionado
-dentro de camadas = [], fazendo com que ela tivesse vários quan dentro ao invés de camadas definidas pelo valor de quan.
+# Total de combinações possíveis
+totalCombinacoes = 2 ** quantas
+tabela = []
 
 
-#matrizes das tabelas
-camadas = []
-linha = []
+'''A genialidade do código a seguir se dá da seguinte forma, cada número em decimal
+pode ser representado por bits de binário e cada posição de um dígito em binário possui
+uma posição, como se fosse uma lista. O >> é como se fosse um empurrão dos dígitos uma
+posição à frente, e acrescentando um 0 nas antigas posições de cada dígito. O & (AND)
+compara as posições dos bits com o número 1 que atua como um filtro, isso porque o 1 em 
+binário é 001, e as primeiras posições são 0 o que torna o 001 um filtro perfeito para
+eliminar os primeiros bits de um número a ser comparado com o 1 em binário.'''
 
-#fórmula de possibilidades de valores, 2^n
-linhas = 2 ** quan
+# Preenche cada linha da tabela usando contagem binária
+for i in range(totalCombinacoes):
+    linha = []  #Cria uma matriz para cada valor de i
+    #Percorre os bits do número 'i' do mais significativo para o menos significativo
+    for j in range(quantas - 1, -1, -1):
+        bit = (i >> j) & 1  #Empurra os bits de i pra prosição j e depois compara isso com 001
+        linha.append(bit) #Depois da comparação os únicos valores para bit serão 0 e 1
+    tabela.append(linha)    #Adiciona cada linha com um bit na tabela
 
-#criação das linhas
-for i in range(linhas):
-    camadas.append([])
-    verdade = len(camadas)
-    for j in range(quan):
-        linha.append(0)
-        camadas.append(linhas)
-
-print(camadas)
-print (verdade)
-'''
-
-#Definição da matriz de camadas e contador de linhas
-camadas = []
-
-possibilidades = 2 ** quan
-
-#modelo da tabela verdade
-for linhas in range(possibilidades):
-    linha = []
-
-    for colunas in range(possibilidades):
-        if possibilidades == 4:
-            for verdadeiros in range(2):
-                linha[colunas][0] = "V"
-            falsos = verdadeiros / 2
-            for falsos in range(3, 4, 1):
-                linha[colunas][2] = "F"
-
-    camadas.append(linha)
-
-print(camadas)
-''' 
-#2 Tentativa de preenchimento da tabela (não funcionou) 
-
-verdades = 0
-falsas = 1
-periodos = possibilidades / 2
-
-#Preenchimento da primeira coluna 
-i = 0
-if quan == 2:
-   for valores in range(len(camadas)):
-       linhas[valores][0] = verdades
-
-#Tentativa de preenchimento da tabela (não funcionou dessa forma)   
-    while i <= len(camadas):
-        linha[i][0] = verdades
-        i += 1
-    j = i * 2
-    while j >= i:
-        linha[j][2] = falsas
-        j -= 1
-'''
+print(tabela)
