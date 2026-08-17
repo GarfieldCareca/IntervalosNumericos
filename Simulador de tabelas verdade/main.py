@@ -30,3 +30,8 @@ for i in range(totalCombinacoes):
     tabela.append(linha)    #Adiciona cada linha com um bit na tabela
 
 print(tabela)
+
+#Início da feature de simulação de expressões
+expressoes = input("Deseja fazer uma simulação de expressões numéricas? \n Digite S para sim e N para não")
+
+
